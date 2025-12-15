@@ -1,12 +1,13 @@
 {
   "roots": [
-    "agri_platform_mobile"
+    "agri_platform"
   ],
   "packages": [
     {
-      "name": "agri_platform_mobile",
+      "name": "agri_platform",
       "version": "1.0.0+1",
       "dependencies": [
+        "cupertino_icons",
         "flutter"
       ],
       "devDependencies": [
@@ -30,6 +31,11 @@
         "test_api",
         "vector_math"
       ]
+    },
+    {
+      "name": "cupertino_icons",
+      "version": "1.0.8",
+      "dependencies": []
     },
     {
       "name": "flutter",
