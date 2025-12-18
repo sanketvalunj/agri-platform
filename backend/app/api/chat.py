@@ -4,7 +4,7 @@ from app.services.llm_service import generate_reply
 
 router = APIRouter()
 
-@router.post("/chat", response_model=ChatResponse)
+@router.post("/", response_model=ChatResponse)
 def chat_endpoint(request: ChatRequest):
     reply = generate_reply(
         user_id=request.user_id,
