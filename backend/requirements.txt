@@ -1,9 +1,19 @@
+# ---------- Core Backend ----------
 fastapi
 uvicorn
+pydantic
 python-dotenv
+
+# ---------- LLM / LangChain ----------
 langchain
 langchain-community
 langchain-groq
 langdetect
 deep-translator
 duckduckgo-search
+
+# ---------- Machine Learning ----------
+numpy
+scikit-learn
+joblib
+pandas

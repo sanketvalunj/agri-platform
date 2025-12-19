@@ -2,28 +2,31 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ChatService {
-  static Future<String> sendMessage(String message) async {
-    final url = Uri.parse("http://127.0.0.1:8000/api/");
+  static const String _baseUrl =
+      "http://127.0.0.1:8000/api/chat/"; // iOS simulator
+  // Android emulator: http://10.0.2.2:8000/api/chat
 
-    print("🔥 CALLING URL: $url");
+  static Future<Map<String, dynamic>> sendMessage({
+    required String userId,
+    required String message,
+    String language = "en",
+  }) async {
+    final body = {
+      "user_id": userId,
+      "message": message,
+      "language": language,
+    };
 
     final response = await http.post(
-      url,
+      Uri.parse(_baseUrl),
       headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "user_id": "test_user",
-        "message": message,
-      }),
+      body: jsonEncode(body),
     );
 
-    print("✅ STATUS CODE: ${response.statusCode}");
-    print("✅ RESPONSE BODY: ${response.body}");
-
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data["reply"].toString();
+      return jsonDecode(response.body);
     } else {
-      return "SERVER ERROR ${response.statusCode}";
+      throw Exception("Failed to get response from server");
     }
   }
 }

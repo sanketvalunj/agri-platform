@@ -4,20 +4,8 @@ import '../../shared/widgets/agri_bottom_nav.dart';
 
 /// ChatbotScreen
 /// -------------
-/// Purpose:
-/// - Farmer advisory via chat
-/// - Ask farming questions in simple language
-///
-/// UX Principles:
-/// - Familiar chat layout (WhatsApp-like)
-/// - Large text & spacing
-/// - Big input & send buttons
-/// - Voice-ready UI
-///
-/// NOW:
-/// - Integrated with FastAPI backend
-/// - Real chat responses
-/// - Loading + error handling
+/// Farmer advisory via chat
+/// Integrated with FastAPI backend
 
 class ChatbotScreen extends StatefulWidget {
   const ChatbotScreen({Key? key}) : super(key: key);
@@ -28,6 +16,10 @@ class ChatbotScreen extends StatefulWidget {
 
 class _ChatbotScreenState extends State<ChatbotScreen> {
   final TextEditingController _controller = TextEditingController();
+
+  // 🔑 TEMP identifiers (same as onboarding)
+  final String userId = "farmer_01";
+  final String language = "en";
 
   final List<Map<String, dynamic>> messages = [
     {
@@ -49,10 +41,17 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     });
 
     try {
-      final reply = await ChatService.sendMessage(text);
+      final response = await ChatService.sendMessage(
+        userId: userId,
+        message: text,
+        language: language,
+      );
 
       setState(() {
-        messages.add({"text": reply, "isUser": false});
+        messages.add({
+          "text": response["reply"],
+          "isUser": false,
+        });
       });
     } catch (e) {
       setState(() {
@@ -125,7 +124,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
             ),
             child: Row(
               children: [
-                // 🎤 Voice Button (UI-only for now)
+                // 🎤 Voice Button (UI-only)
                 SizedBox(
                   height: 52,
                   width: 52,
@@ -153,10 +152,8 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                   child: TextField(
                     controller: _controller,
                     onSubmitted: (_) => sendMessage(),
-                    style: Theme.of(context).textTheme.bodyLarge,
                     decoration: InputDecoration(
                       hintText: 'Ask your farming question…',
-                      hintStyle: TextStyle(color: Colors.grey.shade600),
                       filled: true,
                       fillColor: Colors.grey.shade100,
                       contentPadding: const EdgeInsets.symmetric(
@@ -178,7 +175,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
                   height: 56,
                   width: 56,
                   child: ElevatedButton(
-                    onPressed: sendMessage,
+                    onPressed: isLoading ? null : sendMessage,
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       backgroundColor: Colors.green.shade700,
@@ -197,7 +194,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         ],
       ),
 
-      // 🟢 Bottom Navigation
       bottomNavigationBar: const AgriBottomNav(currentIndex: 1),
     );
   }
@@ -216,23 +212,24 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final alignment = isUser ? Alignment.centerRight : Alignment.centerLeft;
-    final bubbleColor = isUser ? Colors.green.shade100 : Colors.grey.shade200;
-
     return Align(
-      alignment: alignment,
+      alignment:
+          isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 300),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: bubbleColor,
+          color: isUser
+              ? Colors.green.shade100
+              : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Text(
           message,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.black87,
-              ),
+          style: Theme.of(context)
+              .textTheme
+              .bodyLarge
+              ?.copyWith(color: Colors.black87),
         ),
       ),
     );
