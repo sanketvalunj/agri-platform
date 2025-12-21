@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import '../../core/app_routes.dart';
 import '../../shared/widgets/onboarding_progress.dart';
 import '../../shared/widgets/agri_bottom_nav.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 /// LocationSetupScreen
 /// -------------------
 /// Purpose:
 /// - Collect farmer location safely
-/// - Error-proof using dropdown + auto-suggest
+/// - Save location to backend
 /// - Onboarding Step 2 of 4
-///
-/// UX Improvements:
-/// - Dropdown-first
-/// - Auto-updating district list
-/// - Optional village auto-suggest
-///
-/// NOTE:
-/// - UI only
-/// - No backend
 
 class LocationSetupScreen extends StatefulWidget {
   const LocationSetupScreen({Key? key}) : super(key: key);
@@ -27,18 +20,71 @@ class LocationSetupScreen extends StatefulWidget {
 }
 
 class _LocationSetupScreenState extends State<LocationSetupScreen> {
-  /// Default selections (error prevention)
+  /// Default selections
   String selectedState = 'Maharashtra';
   String selectedDistrict = 'Pune';
   String village = '';
 
-  /// Mock state → district mapping (UI only)
+  /// Language passed from previous screen
+  String language = "en";
+
+  /// Mock state → district mapping
   final Map<String, List<String>> stateDistricts = {
     'Maharashtra': ['Pune', 'Nashik', 'Nagpur', 'Kolhapur'],
     'Karnataka': ['Bengaluru', 'Mysuru', 'Belagavi'],
     'Tamil Nadu': ['Coimbatore', 'Salem', 'Madurai'],
     'Uttar Pradesh': ['Lucknow', 'Kanpur', 'Varanasi'],
   };
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // 🔹 Get language from previous screen
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (args != null && args.containsKey("language")) {
+      language = args["language"];
+    }
+  }
+
+  /// 🔹 Save location to backend
+  Future<void> _saveLocation(BuildContext context) async {
+    final body = {
+      "user_id": "farmer_01", // TODO: replace with real user id
+      "state": selectedState,
+      "district": selectedDistrict,
+      "village": village,
+      "language": language,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse("http://127.0.0.1:8000/api/user/location"), // iOS
+        // Android: http://10.0.2.2:8000/api/user/location
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(body),
+      );
+
+      if (response.statusCode == 200) {
+        _onLocationSaved(context);
+      } else {
+        _showError(context, "Failed to save location");
+      }
+    } catch (e) {
+      _showError(context, "Backend not reachable");
+    }
+  }
+
+  void _showError(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        backgroundColor: Colors.red.shade700,
+      ),
+    );
+  }
 
   void _onLocationSaved(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -71,7 +117,6 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -86,9 +131,9 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
               Text(
                 'Your Location',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.green.shade800,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Colors.green.shade800,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
 
               const SizedBox(height: 12),
@@ -129,15 +174,16 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
 
               const SizedBox(height: 20),
 
-              /// 🏡 Village (Auto-suggest helper)
+              /// 🏡 Village
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Village (Optional)',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 8),
                   TextField(
@@ -162,11 +208,12 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton.icon(
-                  onPressed: () => _onLocationSaved(context),
+                  onPressed: () => _saveLocation(context),
                   icon: const Icon(Icons.arrow_forward, size: 28),
                   label: const Text(
                     'Continue',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green.shade700,
@@ -180,13 +227,12 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
           ),
         ),
       ),
-
       bottomNavigationBar: const AgriBottomNav(currentIndex: 0),
     );
   }
 }
 
-/// 🔽 Reusable Dropdown (Farmer-friendly)
+/// 🔽 Reusable Dropdown
 class LocationDropdown extends StatelessWidget {
   final String label;
   final IconData icon;
@@ -210,9 +256,10 @@ class LocationDropdown extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
@@ -225,7 +272,9 @@ class LocationDropdown extends StatelessWidget {
             prefixIcon: Icon(icon),
             filled: true,
             fillColor: Colors.green.shade50,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
       ],
