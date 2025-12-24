@@ -22,6 +22,7 @@ class _MarketPriceScreenState extends State<MarketPriceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4FAF6),
+
       appBar: AppBar(
         title: const Text('Market Price Advisory'),
         backgroundColor: Colors.green.shade700,
@@ -34,11 +35,13 @@ class _MarketPriceScreenState extends State<MarketPriceScreen> {
           ),
         ],
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _filterChips(),
           const SizedBox(height: 20),
+
           _priceCard(
             crop: 'Maize (मक्का)',
             price: '₹1950.00',
@@ -60,10 +63,12 @@ class _MarketPriceScreenState extends State<MarketPriceScreen> {
             positive: true,
             action: 'Sell',
           ),
+
           const SizedBox(height: 24),
           _trendChart(),
         ],
       ),
+
       bottomNavigationBar: const AgriBottomNav(currentIndex: 2),
     );
   }
@@ -143,7 +148,8 @@ class _MarketPriceScreenState extends State<MarketPriceScreen> {
                       fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 6),
               Text(change,
-                  style: TextStyle(color: color, fontWeight: FontWeight.w600)),
+                  style: TextStyle(
+                      color: color, fontWeight: FontWeight.w600)),
             ],
           ),
           Column(
@@ -160,7 +166,9 @@ class _MarketPriceScreenState extends State<MarketPriceScreen> {
                 ),
                 child: Text(action,
                     style: TextStyle(
-                        color: action == 'Sell' ? Colors.green : Colors.orange,
+                        color: action == 'Sell'
+                            ? Colors.green
+                            : Colors.orange,
                         fontWeight: FontWeight.w600)),
               ),
               const SizedBox(height: 10),

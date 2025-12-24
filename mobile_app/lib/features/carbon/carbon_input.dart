@@ -34,13 +34,8 @@ class _CarbonInputScreenState extends State<CarbonInputScreen> {
   void _onSubmit(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-<<<<<<< HEAD
         content: const Row(
           children: [
-=======
-        content: Row(
-          children: const [
->>>>>>> ff9a281da14fd2211d5e027c78a4e6daf4f6262e
             Icon(Icons.check_circle, color: Colors.white),
             SizedBox(width: 12),
             Text(

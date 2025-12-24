@@ -163,13 +163,8 @@ class InfoBox extends StatelessWidget {
         color: Colors.orange.shade100,
         borderRadius: BorderRadius.circular(12),
       ),
-<<<<<<< HEAD
       child: const Row(
         children: [
-=======
-      child: Row(
-        children: const [
->>>>>>> ff9a281da14fd2211d5e027c78a4e6daf4f6262e
           Icon(Icons.info_outline, color: Colors.orange),
           SizedBox(width: 12),
           Expanded(

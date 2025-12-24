@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import './core/app_routes.dart';
-=======
-import 'core/app_routes.dart';
->>>>>>> ff9a281da14fd2211d5e027c78a4e6daf4f6262e
 
 void main() {
   runApp(const AgriBotApp());

@@ -114,13 +114,8 @@ class CarbonDashboardScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Colors.grey.shade300),
             ),
-<<<<<<< HEAD
             child: const Row(
               children: [
-=======
-            child: Row(
-              children: const [
->>>>>>> ff9a281da14fd2211d5e027c78a4e6daf4f6262e
                 CompareItem(
                   label: 'Before\nTraditional Practices',
                   value: 'Low',

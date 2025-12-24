@@ -4,48 +4,42 @@ import '../../shared/widgets/onboarding_progress.dart';
 
 /// LanguageSelectionScreen
 /// -----------------------
-/// Step 1 of onboarding
-/// Farmer selects preferred language
+/// Purpose:
+/// - Step 1 of onboarding
+/// - Let farmers choose their preferred language
+///
+/// UX Principles:
+/// - Very simple
+/// - Large buttons
+/// - Icons + text
+/// - Confidence building
 ///
 /// NOTE:
-/// - Language is stored locally for now
-/// - Backend usage will be added later
+/// - UI only
+/// - Language logic will be added later
 
 class LanguageSelectionScreen extends StatelessWidget {
   const LanguageSelectionScreen({Key? key}) : super(key: key);
 
-  void _onLanguageSelected(BuildContext context, String languageCode) {
-    // TODO: Store language in Provider / Local storage later
-
+  void _onLanguageSelected(BuildContext context) {
     // Farmer reassurance
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-<<<<<<< HEAD
         content: const Row(
           children: [
-=======
-        content: Row(
-          children: const [
->>>>>>> ff9a281da14fd2211d5e027c78a4e6daf4f6262e
             Icon(Icons.check_circle, color: Colors.white),
             SizedBox(width: 12),
             Text('Language selected'),
           ],
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.green.shade700,
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 2),
       ),
     );
 
     Future.delayed(const Duration(milliseconds: 600), () {
-      Navigator.pushReplacementNamed(
-        context,
-        AppRoutes.location,
-        arguments: {
-          "language": languageCode, // 👈 pass forward
-        },
-      );
+      Navigator.pushReplacementNamed(context, AppRoutes.location);
     });
   }
 
@@ -96,23 +90,23 @@ class LanguageSelectionScreen extends StatelessWidget {
                   children: [
                     LanguageButton(
                       label: 'English',
-                      onTap: () => _onLanguageSelected(context, "en"),
+                      onTap: () => _onLanguageSelected(context),
                     ),
                     LanguageButton(
                       label: 'हिंदी (Hindi)',
-                      onTap: () => _onLanguageSelected(context, "hi"),
+                      onTap: () => _onLanguageSelected(context),
                     ),
                     LanguageButton(
                       label: 'मराठी (Marathi)',
-                      onTap: () => _onLanguageSelected(context, "mr"),
+                      onTap: () => _onLanguageSelected(context),
                     ),
                     LanguageButton(
                       label: 'தமிழ் (Tamil)',
-                      onTap: () => _onLanguageSelected(context, "ta"),
+                      onTap: () => _onLanguageSelected(context),
                     ),
                     LanguageButton(
                       label: 'తెలుగు (Telugu)',
-                      onTap: () => _onLanguageSelected(context, "te"),
+                      onTap: () => _onLanguageSelected(context),
                     ),
                   ],
                 ),
@@ -127,7 +121,7 @@ class LanguageSelectionScreen extends StatelessWidget {
 
 /// LanguageButton
 /// --------------
-/// Large, farmer-friendly button
+/// Large, touch-friendly button for language selection
 class LanguageButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
@@ -143,7 +137,7 @@ class LanguageButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: SizedBox(
-        height: 60,
+        height: 60, // 👈 Big tap area
         width: double.infinity,
         child: ElevatedButton.icon(
           onPressed: onTap,
