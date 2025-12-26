@@ -1,23 +1,17 @@
-# ----------------------------
-# Python virtual environments
-# ----------------------------
+# Node / Blockchain
+node_modules/
+blockchain/node_modules/
+blockchain/artifacts/
+blockchain/cache/
+
+# Python
 venv/
 backend/venv/
-
-# ----------------------------
-# Python cache files
-# ----------------------------
 __pycache__/
 *.pyc
 
-# ----------------------------
-# Environment variables
-# ----------------------------
+# Env / OS
 .env
-
-# ----------------------------
-# OS / Editor files
-# ----------------------------
 .DS_Store
 .vscode/
 .idea/

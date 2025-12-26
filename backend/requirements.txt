@@ -17,3 +17,11 @@ numpy
 scikit-learn
 joblib
 pandas
+
+# ---------- Blockchain / Web3 ----------
+web3
+eth-account
+
+# ---------- Utilities ----------
+requests
+
