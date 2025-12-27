@@ -14,9 +14,7 @@ from app.utils.helpers import (
 router = APIRouter()
 
 # 🔥 IMPORTANT: Explicit OPTIONS handler for CORS preflight
-@router.options("/")
-def options_chat():
-    return {}
+
 
 @router.post("/", response_model=ChatResponse)
 def chat_endpoint(request: ChatRequest):

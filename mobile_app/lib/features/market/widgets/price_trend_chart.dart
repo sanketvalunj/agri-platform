@@ -37,4 +37,3 @@ class PriceTrendChart extends StatelessWidget {
     );
   }
 }
-

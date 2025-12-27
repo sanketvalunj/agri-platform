@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../shared/widgets/agri_bottom_nav.dart';
 
 class AlertsTipsScreen extends StatelessWidget {
   const AlertsTipsScreen({Key? key}) : super(key: key);
