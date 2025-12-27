@@ -1,29 +1,25 @@
-import '../../market/models/market_price_model.dart';
 import 'package:flutter/material.dart';
+import '../models/market_price.dart';
 
 class MarketPriceCard extends StatelessWidget {
   final MarketPrice price;
-
   const MarketPriceCard({super.key, required this.price});
 
   @override
   Widget build(BuildContext context) {
-    final isUp = price.trend == "up";
+    final bool up = price.modalPrice >= price.minPrice;
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isUp
-              ? [Colors.green.shade400, Colors.green.shade700]
-              : [Colors.orange.shade400, Colors.orange.shade700],
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
           )
         ],
       ),
@@ -31,55 +27,39 @@ class MarketPriceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${price.crop} • ${price.market}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
+            "${price.commodity} • ${price.mandi}",
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
+          Text("₹${price.modalPrice}",
+              style:
+                  const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 6),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _priceColumn("Min", price.minPrice),
-              _priceColumn("Avg", price.avgPrice),
-              _priceColumn("Max", price.maxPrice),
+              Text("Min ₹${price.minPrice}"),
+              const SizedBox(width: 16),
+              Text("Max ₹${price.maxPrice}"),
             ],
           ),
-          const SizedBox(height: 14),
+          const SizedBox(height: 8),
           Row(
             children: [
               Icon(
-                isUp ? Icons.trending_up : Icons.trending_down,
-                color: Colors.white,
+                up ? Icons.trending_up : Icons.trending_down,
+                color: up ? Colors.green : Colors.red,
               ),
               const SizedBox(width: 6),
               Text(
-                "${price.changePercent}% today",
-                style: const TextStyle(color: Colors.white),
-              ),
+                up ? "Price Rising" : "Price Falling",
+                style: TextStyle(
+                  color: up ? Colors.green : Colors.red,
+                ),
+              )
             ],
-          ),
+          )
         ],
       ),
-    );
-  }
-
-  Widget _priceColumn(String label, int value) {
-    return Column(
-      children: [
-        Text(label, style: const TextStyle(color: Colors.white70)),
-        const SizedBox(height: 4),
-        Text(
-          "₹$value",
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }

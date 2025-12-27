@@ -58,7 +58,6 @@ class _CarbonInputScreenState extends State<CarbonInputScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         backgroundColor: Colors.green.shade700,
         centerTitle: true,
@@ -67,7 +66,6 @@ class _CarbonInputScreenState extends State<CarbonInputScreen> {
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
-
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
@@ -153,7 +151,6 @@ class _CarbonInputScreenState extends State<CarbonInputScreen> {
           ),
         ),
       ),
-
       bottomNavigationBar: const AgriBottomNav(currentIndex: 2),
     );
   }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "322919516706",
+    "project_id": "agri-auth-43b07",
+    "storage_bucket": "agri-auth-43b07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322919516706:android:744fb938b8efaf9cccd87b",
+        "android_client_info": {
+          "package_name": "com.example.agri_platform"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGf740279xY4ZEz91soAf0g1s2VpX6SBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,8 +24,7 @@ class BasicFarmProfileScreen extends StatefulWidget {
   const BasicFarmProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<BasicFarmProfileScreen> createState() =>
-      _BasicFarmProfileScreenState();
+  State<BasicFarmProfileScreen> createState() => _BasicFarmProfileScreenState();
 }
 
 class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
@@ -61,7 +60,6 @@ class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -106,8 +104,7 @@ class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
                   'Sugarcane',
                   'Vegetables',
                 ],
-                onChanged: (val) =>
-                    setState(() => selectedCrop = val),
+                onChanged: (val) => setState(() => selectedCrop = val),
               ),
 
               const SizedBox(height: 20),
@@ -124,8 +121,7 @@ class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
                   '3–5 acres',
                   'More than 5 acres',
                 ],
-                onChanged: (val) =>
-                    setState(() => landSize = val),
+                onChanged: (val) => setState(() => landSize = val),
               ),
 
               const SizedBox(height: 20),
@@ -141,8 +137,7 @@ class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
                   'Organic',
                   'Mixed',
                 ],
-                onChanged: (val) =>
-                    setState(() => farmingType = val),
+                onChanged: (val) => setState(() => farmingType = val),
               ),
 
               const Spacer(),
@@ -173,7 +168,6 @@ class _BasicFarmProfileScreenState extends State<BasicFarmProfileScreen> {
           ),
         ),
       ),
-
       bottomNavigationBar: const AgriBottomNav(currentIndex: 0),
     );
   }

@@ -13,7 +13,6 @@ class CarbonDashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         backgroundColor: Colors.green.shade700,
         elevation: 0,
@@ -23,11 +22,9 @@ class CarbonDashboardScreen extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
-
       body: SafeArea(
         child: hasCarbonData ? _buildDashboard(context) : _buildEmptyState(),
       ),
-
       bottomNavigationBar: const AgriBottomNav(currentIndex: 2),
     );
   }
@@ -43,9 +40,9 @@ class CarbonDashboardScreen extends StatelessWidget {
           Text(
             'Your Carbon Impact',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: Colors.green.shade800,
-              fontWeight: FontWeight.bold,
-            ),
+                  color: Colors.green.shade800,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
@@ -101,9 +98,9 @@ class CarbonDashboardScreen extends StatelessWidget {
           Text(
             'Impact Comparison',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Colors.green.shade800,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green.shade800,
+                ),
           ),
           const SizedBox(height: 12),
 
@@ -255,15 +252,17 @@ class ImpactCard extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
                     Text(
                       value,
-                      style: Theme.of(context).textTheme.headlineSmall
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     if (unit.isNotEmpty) ...[
