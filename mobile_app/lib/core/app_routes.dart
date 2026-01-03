@@ -30,6 +30,7 @@ import '../features/crop_recommendation/weather_advisory_screen.dart';
 
 // ================= PROFILE / SETTINGS / HELP =================
 import '../features/profile_screen/ProfileSettingsScreen.dart';
+import '../features/profile/profile_edit_screen.dart';
 import '../features/settings/setting_screen.dart';
 import '../features/help/help_screen.dart';
 
@@ -57,6 +58,7 @@ class AppRoutes {
   // ================= EXTRA =================
   static const String alerts = '/alerts';
   static const String profile = '/profile';
+  static const String editProfile = '/edit-profile';
   static const String settings = '/settings';
   static const String help = '/help';
   static const String weather = '/weather';
@@ -85,6 +87,7 @@ class AppRoutes {
     // Alerts / Profile / Help
     alerts: (_) => const AlertsTipsScreen(),
     profile: (_) => const ProfileSettingsScreen(),
+    editProfile: (_) => const ProfileEditScreen(),
     settings: (_) => const SettingsScreen(),
     help: (_) => const HelpHowItWorksScreen(),
 
