@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:sizer/sizer.dart';
 import './core/app_routes.dart';
 import './firebase_options.dart';
 import './features/auth/auth_wrapper.dart';
@@ -35,58 +36,62 @@ class AgriBotApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Agri Bot',
-      debugShowCheckedModeBanner: false,
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp(
+          title: 'Agri Bot',
+          debugShowCheckedModeBanner: false,
 
-      // 🎨 Global theme (farmer-friendly)
-      theme: ThemeData(
-        useMaterial3: false,
-        primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Roboto',
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.green.shade700,
-          elevation: 0,
-          centerTitle: true,
-          titleTextStyle: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(56), // 👈 big buttons
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
+          // 🎨 Global theme (farmer-friendly)
+          theme: ThemeData(
+            useMaterial3: false,
+            primarySwatch: Colors.green,
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: 'Roboto',
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.green.shade700,
+              elevation: 0,
+              centerTitle: true,
+              titleTextStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+              iconTheme: const IconThemeData(color: Colors.white),
             ),
-            textStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(56), // 👈 big buttons
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              filled: true,
+              fillColor: Colors.green.shade50,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 16,
+                horizontal: 16,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
             ),
           ),
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.green.shade50,
-          contentPadding: const EdgeInsets.symmetric(
-            vertical: 16,
-            horizontal: 16,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
 
-      // 🧭 Routing
-      routes: AppRoutes.routes,
+          // 🧭 Routing
+          routes: AppRoutes.routes,
 
-      // 🚀 App entry point - AuthWrapper handles authentication
-      home: const AuthWrapper(),
+          // 🚀 App entry point - AuthWrapper handles authentication
+          home: const AuthWrapper(),
+        );
+      },
     );
   }
 }

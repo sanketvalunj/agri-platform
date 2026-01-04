@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../core/app_routes.dart';
-import '../home/home_dashboard.dart';
+import '../home/new_home_dashboard.dart';
 import 'login_screen.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -31,7 +30,7 @@ class AuthWrapper extends StatelessWidget {
     // For now, direct to home dashboard
     // In a real app, you might check if profile is complete
     // and redirect to onboarding if needed
-    return const HomeDashboardScreen();
+    return NewHomeDashboard();
   }
 }
 

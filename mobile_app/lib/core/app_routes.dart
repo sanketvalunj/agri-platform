@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
 // ================= ONBOARDING =================
-import '../features/crop_recommendation/crop_recommendation.dart';
-import '../features/onboarding/splash_screen.dart';
 import '../features/onboarding/language_select.dart';
 import '../features/onboarding/location_setup.dart';
 import '../features/onboarding/profile_screen.dart';
 
 // ================= HOME =================
-import '../features/home/home_dashboard.dart';
+import '../features/home/new_home_dashboard.dart';
 
 // ================= CHATBOT =================
 import '../features/chatbot/chat_screen.dart';
@@ -26,7 +24,14 @@ import '../features/carbon/carbon_insights.dart';
 import '../features/alerts/alerts_screen.dart';
 
 // ================= WEATHER =================
+import '../features/crop_recommendation/crop_recommendation.dart';
 import '../features/crop_recommendation/weather_advisory_screen.dart';
+
+// ================= CROP MANAGEMENT =================
+import '../features/crop_management/crop_management.dart';
+
+// ================= COMMUNITY =================
+import '../features/community_feed/community_feed.dart';
 
 // ================= PROFILE / SETTINGS / HELP =================
 import '../features/profile_screen/ProfileSettingsScreen.dart';
@@ -55,6 +60,12 @@ class AppRoutes {
   static const String carbonDashboard = '/carbon-dashboard';
   static const String carbonInsights = '/carbon-insights';
 
+  // ================= CROP MANAGEMENT =================
+  static const String cropManagement = '/crop-management';
+
+  // ================= COMMUNITY =================
+  static const String communityFeed = '/community-feed';
+
   // ================= EXTRA =================
   static const String alerts = '/alerts';
   static const String profile = '/profile';
@@ -73,7 +84,7 @@ class AppRoutes {
     farmProfile: (_) => const BasicFarmProfileScreen(),
 
     // Core
-    home: (_) => const HomeDashboardScreen(),
+    home: (_) => const NewHomeDashboard(),
     chatbot: (_) => const ChatbotScreen(),
 
     market: (_) => const MarketPriceScreen(),
@@ -83,6 +94,12 @@ class AppRoutes {
     carbonInput: (_) => const CarbonInputScreen(),
     carbonDashboard: (_) => const CarbonDashboardScreen(),
     carbonInsights: (_) => const CarbonInsightsScreen(),
+
+    // Crop Management
+    cropManagement: (_) => const CropManagementScreen(),
+
+    // Community
+    communityFeed: (_) => const CommunityFeedScreen(),
 
     // Alerts / Profile / Help
     alerts: (_) => const AlertsTipsScreen(),
@@ -97,3 +114,4 @@ class AppRoutes {
     weather: (_) => const WeatherAdvisoryScreen(),
   };
 }
+
