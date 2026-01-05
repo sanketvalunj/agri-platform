@@ -156,8 +156,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       try {
         setState(() => message['isGeneratingAudio'] = true);
 
-        audioUrl =
-            await _ttsApiService.convertTextToSpeech(message['text']);
+        audioUrl = await _ttsApiService.convertTextToSpeech(message['text']);
 
         setState(() {
           message['audioUrl'] = audioUrl;
@@ -172,14 +171,10 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
       }
     }
 
-    if (audioUrl == null) return;
-
-    final isPlaying =
-        _currentPlayingUrl == audioUrl &&
+    final isPlaying = _currentPlayingUrl == audioUrl &&
         _audioPlayer.state == PlayerState.playing;
 
-    final isPaused =
-        _currentPlayingUrl == audioUrl &&
+    final isPaused = _currentPlayingUrl == audioUrl &&
         _audioPlayer.state == PlayerState.paused;
 
     try {
@@ -219,8 +214,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_active),
-            onPressed: () =>
-                Navigator.pushNamed(context, AppRoutes.alerts),
+            onPressed: () => Navigator.pushNamed(context, AppRoutes.alerts),
           ),
         ],
       ),
@@ -231,7 +225,6 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
           _inputBar(),
         ],
       ),
-      bottomNavigationBar: const AgriBottomNav(currentIndex: 1),
     );
   }
 

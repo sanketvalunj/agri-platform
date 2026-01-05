@@ -13,7 +13,7 @@ class FarmProfileEditScreen extends StatefulWidget {
 
 class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
   final _formKey = GlobalKey<FormState>();
-  
+
   // Form controllers
   final _farmAreaController = TextEditingController();
   final _farmingExperienceController = TextEditingController();
@@ -47,11 +47,12 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
     setState(() => _isLoading = true);
     try {
       final profile = await ProfileService.getUserProfile();
-      
+
       setState(() {
         _currentProfile = profile;
         _farmAreaController.text = profile.farmArea.toString();
-        _farmingExperienceController.text = profile.farmingExperience.toString();
+        _farmingExperienceController.text =
+            profile.farmingExperience.toString();
         _bioController.text = profile.bio;
         _selectedFarmAreaUnit = profile.farmAreaUnit;
         _selectedFarmingType = profile.farmingType;
@@ -75,7 +76,8 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
 
     try {
       final farmArea = double.parse(_farmAreaController.text.trim());
-      final farmingExperience = int.parse(_farmingExperienceController.text.trim());
+      final farmingExperience =
+          int.parse(_farmingExperienceController.text.trim());
 
       // Validate farm information
       final errors = FarmInfoService.validateFarmInfo(
@@ -95,20 +97,22 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
 
       // Calculate trust score
       final updatedProfile = _currentProfile?.copyWith(
-        farmArea: farmArea,
-        farmAreaUnit: _selectedFarmAreaUnit,
-        cropTypes: _selectedCrops,
-        farmingType: _selectedFarmingType,
-        irrigation: _selectedIrrigation,
-        soilType: _selectedSoilType,
-        farmingExperience: farmingExperience,
-        bio: _bioController.text.trim(),
-        lastCarbonUpdate: DateTime.now(),
-      ) ?? UserProfile.empty();
+            farmArea: farmArea,
+            farmAreaUnit: _selectedFarmAreaUnit,
+            cropTypes: _selectedCrops,
+            farmingType: _selectedFarmingType,
+            irrigation: _selectedIrrigation,
+            soilType: _selectedSoilType,
+            farmingExperience: farmingExperience,
+            bio: _bioController.text.trim(),
+            lastCarbonUpdate: DateTime.now(),
+          ) ??
+          UserProfile.empty();
 
       // Calculate trust score
       final trustScore = FarmInfoService.calculateTrustScore(updatedProfile);
-      final profileWithTrustScore = updatedProfile.copyWith(trustScore: trustScore);
+      final profileWithTrustScore =
+          updatedProfile.copyWith(trustScore: trustScore);
 
       await ProfileService.saveUserProfile(profileWithTrustScore);
       await FarmInfoService.saveFarmInfo(profileWithTrustScore);
@@ -160,7 +164,7 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
 
   void _showCropSelectionDialog() {
     final availableCrops = FarmInfoService.getAvailableCrops();
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -173,7 +177,7 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
             itemBuilder: (context, index) {
               final crop = availableCrops[index];
               final isSelected = _selectedCrops.contains(crop);
-              
+
               return CheckboxListTile(
                 title: Text(crop),
                 value: isSelected,
@@ -308,7 +312,8 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
                     border: OutlineInputBorder(),
                   ),
                   items: FarmInfoService.getFarmAreaUnits()
-                      .map((unit) => DropdownMenuItem(value: unit, child: Text(unit)))
+                      .map((unit) =>
+                          DropdownMenuItem(value: unit, child: Text(unit)))
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -349,8 +354,8 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
                           ? '${_selectedCrops.length} crops selected'
                           : 'Select crops',
                       style: TextStyle(
-                        color: _selectedCrops.isNotEmpty 
-                            ? Colors.black87 
+                        color: _selectedCrops.isNotEmpty
+                            ? Colors.black87
                             : Colors.grey.shade600,
                       ),
                     ),
@@ -389,7 +394,8 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
       child: Column(
         children: [
           DropdownButtonFormField<String>(
-            value: _selectedFarmingType.isNotEmpty ? _selectedFarmingType : null,
+            value:
+                _selectedFarmingType.isNotEmpty ? _selectedFarmingType : null,
             decoration: const InputDecoration(
               labelText: 'Farming Type',
               hintText: 'Select farming type',
@@ -584,4 +590,3 @@ class _FarmProfileEditScreenState extends State<FarmProfileEditScreen> {
     );
   }
 }
-

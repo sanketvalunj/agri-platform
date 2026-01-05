@@ -22,7 +22,7 @@ class ProfileSettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          _profileCard(context), // ✅ FIX
+          _profileCard(),
           const SizedBox(height: 24),
           _settingsSection(context),
         ],
@@ -32,7 +32,7 @@ class ProfileSettingsScreen extends StatelessWidget {
   }
 
   // 👤 PROFILE CARD
-  Widget _profileCard(BuildContext context) {
+  Widget _profileCard() {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -54,45 +54,26 @@ class ProfileSettingsScreen extends StatelessWidget {
             child: const Icon(Icons.person, size: 36, color: Colors.green),
           ),
           const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Avantika',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'Avantika',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                SizedBox(height: 4),
-                Text(
-                  'Pune, Maharashtra',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () => _navigateToEditProfile(context), // ✅ FIX
-            icon: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.1),
-                shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.edit, color: Colors.green, size: 20),
-            ),
-            tooltip: 'Edit Profile',
-          ),
+              SizedBox(height: 4),
+              Text(
+                'Pune, Maharashtra',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          )
         ],
       ),
     );
-  }
-
-  // ✅ FIXED: context passed properly
-  void _navigateToEditProfile(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.editProfile);
   }
 
   // ⚙️ SETTINGS LIST
@@ -138,7 +119,7 @@ class ProfileSettingsScreen extends StatelessWidget {
 }
 
 //
-// 🧩 REUSABLE SETTINGS TILE
+// 🧩 REUSABLE SETTINGS TILE (PRODUCTION QUALITY)
 //
 class SettingsTile extends StatefulWidget {
   final IconData icon;

@@ -25,7 +25,6 @@ class CarbonDashboardScreen extends StatelessWidget {
       body: SafeArea(
         child: hasCarbonData ? _buildDashboard(context) : _buildEmptyState(),
       ),
-      bottomNavigationBar: const AgriBottomNav(currentIndex: 2),
     );
   }
 

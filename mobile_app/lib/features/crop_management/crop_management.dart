@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../widgets/custom_app_bar.dart';
-import '../../widgets/custom_bottom_bar.dart';
+import '../../shared/widgets/custom_app_bar.dart';
+import '../../shared/widgets/agri_bottom_nav.dart';
 import './widgets/add_crop_bottom_sheet.dart';
 import './widgets/crop_card_widget.dart';
 import './widgets/health_alert_widget.dart';
@@ -261,11 +261,11 @@ class _CropManagementState extends State<CropManagement>
     setState(() => _currentBottomNavIndex = index);
 
     final routes = [
-      '/home-dashboard',
-      '/weather-insights',
+      '/home',
+      '/weather',
       '/crop-management',
-      '/community-feed',
-      '/notifications-center'
+      '/community',
+      '/alerts'
     ];
 
     Navigator.pushReplacementNamed(context, routes[index]);
@@ -355,7 +355,7 @@ class _CropManagementState extends State<CropManagement>
         ),
         backgroundColor: theme.colorScheme.primary,
       ),
-      bottomNavigationBar: CustomBottomBar(
+      bottomNavigationBar: AgriBottomNav(
         currentIndex: _currentBottomNavIndex,
         onTap: _onBottomNavTap,
       ),

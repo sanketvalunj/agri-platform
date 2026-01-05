@@ -9,7 +9,6 @@ class UserProfile {
   final String profileImageUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
-  
   // Farm Information
   final double farmArea;
   final String farmAreaUnit;
@@ -18,14 +17,12 @@ class UserProfile {
   final String irrigation;
   final String soilType;
   final int farmingExperience;
-  
   // Verification & Trust
   final String verificationStatus;
   final int trustScore;
   final String accountStatus;
   final DateTime? verificationDate;
   final DateTime? lastCarbonUpdate;
-  
   // Verification Details
   final bool satelliteDataVerified;
   final bool activityPhotosSubmitted;
@@ -139,12 +136,12 @@ class UserProfile {
       phone: json['phone'] ?? '',
       bio: json['bio'] ?? '',
       profileImageUrl: json['profileImageUrl'] ?? '',
-      createdAt: json['createdAt'] != null 
-        ? DateTime.parse(json['createdAt']) 
-        : DateTime.now(),
-      updatedAt: json['updatedAt'] != null 
-        ? DateTime.parse(json['updatedAt']) 
-        : DateTime.now(),
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : DateTime.now(),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : DateTime.now(),
       // Farm Information
       farmArea: (json['farmArea'] ?? 0.0).toDouble(),
       farmAreaUnit: json['farmAreaUnit'] ?? 'Acres',
@@ -157,12 +154,12 @@ class UserProfile {
       verificationStatus: json['verificationStatus'] ?? 'Pending',
       trustScore: json['trustScore'] ?? 0,
       accountStatus: json['accountStatus'] ?? 'Active',
-      verificationDate: json['verificationDate'] != null 
-        ? DateTime.parse(json['verificationDate']) 
-        : null,
-      lastCarbonUpdate: json['lastCarbonUpdate'] != null 
-        ? DateTime.parse(json['lastCarbonUpdate']) 
-        : null,
+      verificationDate: json['verificationDate'] != null
+          ? DateTime.parse(json['verificationDate'])
+          : null,
+      lastCarbonUpdate: json['lastCarbonUpdate'] != null
+          ? DateTime.parse(json['lastCarbonUpdate'])
+          : null,
       // Verification Details
       satelliteDataVerified: json['satelliteDataVerified'] ?? false,
       activityPhotosSubmitted: json['activityPhotosSubmitted'] ?? false,
@@ -242,7 +239,8 @@ class UserProfile {
       bio: bio ?? this.bio,
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? DateTime.now(), // Always update timestamp when modified
+      updatedAt:
+          updatedAt ?? DateTime.now(), // Always update timestamp when modified
       // Farm Information
       farmArea: farmArea ?? this.farmArea,
       farmAreaUnit: farmAreaUnit ?? this.farmAreaUnit,
@@ -258,9 +256,12 @@ class UserProfile {
       verificationDate: verificationDate ?? this.verificationDate,
       lastCarbonUpdate: lastCarbonUpdate ?? this.lastCarbonUpdate,
       // Verification Details
-      satelliteDataVerified: satelliteDataVerified ?? this.satelliteDataVerified,
-      activityPhotosSubmitted: activityPhotosSubmitted ?? this.activityPhotosSubmitted,
-      seasonalValidationPending: seasonalValidationPending ?? this.seasonalValidationPending,
+      satelliteDataVerified:
+          satelliteDataVerified ?? this.satelliteDataVerified,
+      activityPhotosSubmitted:
+          activityPhotosSubmitted ?? this.activityPhotosSubmitted,
+      seasonalValidationPending:
+          seasonalValidationPending ?? this.seasonalValidationPending,
       identityVerified: identityVerified ?? this.identityVerified,
     );
   }
@@ -327,7 +328,6 @@ class UserProfile {
     if (lastCarbonUpdate == null) return 'Never';
     final now = DateTime.now();
     final difference = now.difference(lastCarbonUpdate!);
-    
     if (difference.inDays == 0) {
       return 'Today';
     } else if (difference.inDays == 1) {

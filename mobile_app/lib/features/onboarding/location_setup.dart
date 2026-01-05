@@ -56,7 +56,7 @@ class _LocationSetupScreenState extends State<LocationSetupScreen> {
     );
 
     Future.delayed(const Duration(milliseconds: 600), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.farmProfile);
+      Navigator.pushReplacementNamed(context, AppRoutes.home);
     });
   }
 

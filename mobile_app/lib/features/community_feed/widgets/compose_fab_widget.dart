@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/app_export.dart';
-import '../../../widgets/custom_icon_widget.dart';
+import '../../../shared/widgets/custom_icon_widget.dart';
 
 class ComposeFabWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -18,11 +18,11 @@ class ComposeFabWidget extends StatelessWidget {
     return FloatingActionButton.extended(
       onPressed: onPressed,
       icon: CustomIconWidget(
-        iconName: 'edit',
+        iconName: 'add',
         size: 20,
         color: theme.colorScheme.onPrimary,
       ),
-      label: Text('Post'),
+      label: Text('Compose'),
       backgroundColor: theme.colorScheme.primary,
       foregroundColor: theme.colorScheme.onPrimary,
     );

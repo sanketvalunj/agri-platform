@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'auth_service.dart';
 import 'otp_screen.dart';
 
@@ -118,10 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'Smart Farming Assistant',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
                 ),
 
                 const SizedBox(height: 48),
@@ -130,10 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'Enter your phone number to get started',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade700,
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
                 ),
 
                 const SizedBox(height: 24),
@@ -197,10 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   'We will send you a 6-digit OTP via SMS for verification',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
                 ),
               ],
             ),
