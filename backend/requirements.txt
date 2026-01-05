@@ -1,0 +1,42 @@
+# ---------- Core Backend ----------
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+python-multipart
+anyio
+
+# ---------- Database ----------
+sqlalchemy
+alembic
+psycopg2-binary
+
+# ---------- Auth / Security ----------
+python-jose[cryptography]
+passlib[bcrypt]
+
+# ---------- LLM / LangChain ----------
+langchain
+langchain-community
+langchain-groq
+langdetect
+deep-translator
+duckduckgo-search
+
+# ---------- Machine Learning ----------
+numpy
+pandas
+scikit-learn
+joblib
+
+# ---------- Blockchain / Web3 ----------
+web3
+eth-account
+
+# ---------- HTTP / Utilities ----------
+requests
+httpx
+
+# ---------- Text-to-Speech ----------
+gTTS
+soundfile
